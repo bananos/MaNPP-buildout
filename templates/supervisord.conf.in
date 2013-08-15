@@ -1,0 +1,63 @@
+
+[supervisord]
+childlogdir = ${buildout:directory}/var/log
+logfile = ${buildout:directory}/var/log/supervisord.log
+logfile_maxbytes = 50MB
+logfile_backups = 10
+loglevel = info
+pidfile = ${buildout:directory}/var/supervisord.pid
+umask = 022
+nodaemon = false
+nocleanup = false
+
+[inet_http_server]
+port = 9001
+username = 
+password = 
+
+[supervisorctl]
+serverurl = http://localhost:9001
+prompt = gd
+username = 
+password = 
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory=supervisor.rpcinterface:make_main_rpcinterface
+
+
+[program:postgresqld]
+command = ${postgresql-conf:basedir}/bin/postgres -D ${postgresql-conf:datadir}
+user = ${postgresql-conf:user}
+stopsignal=INT
+directory = ${buildout:directory}/bin
+priority = 10
+autostart = true
+redirect_stderr = true
+stdout_logfile = ${buildout:directory}/var/log/postgresqld.stdout.log
+stderr_logfile = ${buildout:directory}/var/log/postgresqld.stderr.log
+
+
+
+[program:php-fpm]
+command = ${buildout:parts-directory}/php/sbin/php-fpm -c ${buildout:directory}/etc/ --fpm-config ${buildout:directory}/etc/php-fpm.conf --nodaemonize
+process_name = php-fpm
+user = ${buildout:user}
+group = ${buildout:group}
+directory = ${buildout:parts-directory}/php/
+priority = 10
+autostart = true
+redirect_stderr = true
+stdout_logfile = ${buildout:directory}/var/log/php-fpm.stdout.log
+stderr_logfile = ${buildout:directory}/var/log/php-fpm.stderr.log
+
+
+
+[program:nginx]
+command = ${buildout:parts-directory}/nginx/sbin/nginx -c ${buildout:directory}/etc/nginx.conf
+process_name = nginx
+directory = ${buildout:parts-directory}/nginx/sbin/
+priority = 10
+autostart = true
+redirect_stderr = true
+stdout_logfile = ${buildout:directory}/var/log/nginx.stdout.log
+stderr_logfile = ${buildout:directory}/var/log/nginx.stderr.log

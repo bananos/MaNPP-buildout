@@ -1,4 +1,4 @@
-MaNPP-buildout
+mnpp-buildout
 ==============
 Install Nginx /PostgreSQL / PHP-FPM stack on your Mac for development purposes.
 
@@ -30,15 +30,15 @@ Installation
 
 ```bash
 
-[bananos@amber]$ git clone git@github.com:bananos/MaNPP-buildout.git
-[bananos@amber]$ cd MaNPP-buildout
+[bananos@amber]$ git clone git@github.com:bananos/npp-buildout.git
+[bananos@amber]$ cd npp-buildout
 
 [bananos@amber]$ /usr/bin/python2.7 bootstrap.py
-Creating directory '/Users/bananos/Projects/github/MaNPP-buildout/bin'.
-Creating directory '/Users/bananos/Projects/github/MaNPP-buildout/parts'.
-Creating directory '/Users/bananos/Projects/github/MaNPP-buildout/eggs'.
-Creating directory '/Users/bananos/Projects/github/MaNPP-buildout/develop-eggs'.
-Generated script '/Users/bananos/Projects/github/MaNPP-buildout/bin/buildout'.
+Creating directory '/Users/bananos/Projects/github/npp-buildout/bin'.
+Creating directory '/Users/bananos/Projects/github/npp-buildout/parts'.
+Creating directory '/Users/bananos/Projects/github/npp-buildout/eggs'.
+Creating directory '/Users/bananos/Projects/github/npp-buildout/develop-eggs'.
+Generated script '/Users/bananos/Projects/github/npp-buildout/bin/buildout'.
 ```
 
 ### Specify your user/group and timezone
@@ -66,7 +66,7 @@ Save and proceed to next step.
 [bananos@amber]$ bin/buildout
 ```
 
-Grab a cup of coffee & wait for a while for parts to compile. On core i5 mac it takes about 20min.
+Grab a cup of coffee & wait for a while for parts to compile. On core i5 mac it takes about 10min.
 
 
 ### Run supervisor
@@ -74,7 +74,7 @@ Grab a cup of coffee & wait for a while for parts to compile. On core i5 mac it 
 Once compilation is done, run [supervisor](http://supervisord.org), a client/server system that allows its users
 to monitor and control a number of processes on UNIX-like operating systems.
 
-Since we're going to run nginx on default 80 port, we're going to use `sudo`.
+Since we're going to run nginx on default 80 port, let's use `sudo`.
 ```bash
 
 [bananos@amber]$ sudo bin/supervisord
